@@ -1,0 +1,14 @@
+program CadastroCliente;
+
+uses
+  Vcl.Forms,
+  frmPrincipal in 'frmPrincipal.pas' {formPrincipal};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TformPrincipal, formPrincipal);
+  Application.Run;
+end.

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/03/23 10:33:57.000.214,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/03 17:19:14.000.677,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/10/29 08:35:22.000.735,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/11/13 09:30:06.000.855,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/11/13 09:35:51.000.715,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2021/06/18 15:32:02.000.522,=C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2021/06/18 15:32:26.000.338,C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\Users\user\Desktop\Teste\frmPrincipal.dfm</Transaction>
+    <Transaction>2021/06/18 15:32:26.000.338,C:\Users\user\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\user\Desktop\Teste\frmPrincipal.pas</Transaction>
+    <Transaction>2021/06/18 15:33:14.000.035,C:\Users\user\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\user\Desktop\Teste\CadastroCliente.dproj</Transaction>
+    <Transaction>2021/06/19 18:53:56.000.897,=C:\Projetos\Teste Info Sistemas\Cadastros\frmCadastroCliente.pas</Transaction>
+    <Transaction>2021/06/19 18:57:01.000.311,=C:\Projetos\Teste Info Sistemas\Unit1.pas</Transaction>
+    <Transaction>2021/06/19 18:57:23.000.834,C:\Projetos\Teste Info Sistemas\Units\uConsultaCEP.pas=C:\Projetos\Teste Info Sistemas\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,78 @@
+unit uConsultaCEP;
+
+interface
+
+  uses
+    Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+    REST.Types, REST.Client, Data.Bind.Components,Data.Bind.ObjectScope;
+
+type
+  ConsultaCEP = class
+  private
+    FCEP: String;
+    RestClient: TRESTClient;
+    RestRequest: TRESTRequest;
+    RestResponse: TRESTResponse;
+    constructor Create();
+    destructor Destroy();
+    procedure SetCEP(const Value: String);
+
+  public
+    function fConsultaCEP(CEP:string) : String;
+
+    property CEP:String read FCEP write SetCEP;
+
+  end;
+
+
+
+implementation
+
+{ ConsultaCEP }
+
+constructor ConsultaCEP.Create;
+begin
+  RestClient   := TRESTClient.Create(nil);
+  RestRequest  := TRESTRequest.Create(nil);
+  RestResponse := TRESTResponse.Create(nil);
+end;
+
+destructor ConsultaCEP.Destroy;
+begin
+  RestClient.Free;
+  RestRequest.Free;
+  RestResponse.Free;
+end;
+
+function ConsultaCEP.fConsultaCEP(CEP: string): String;
+begin
+  FCEP := CEP; // Se vier vazio, retorna exception
+
+  RestClient.FallbackCharsetEncoding := 'utf-8';
+  RestClient.SynchronizedEvents      := True;
+  RestClient.BaseURL                 := 'viacep.com.br/ws/'+FCEP+'/json/';
+
+  RestRequest.Accept        := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
+  RestRequest.AcceptCharset := 'utf-8, *;q=0.8';
+  RestRequest.Method        := rmGET;
+
+
+  RestRequest.Client   := RestClient;
+  RestRequest.Response := RestResponse;
+
+  RestRequest.Execute;
+
+  Result := RestRequest.Response.JSONText;
+
+end;
+
+procedure ConsultaCEP.SetCEP(const Value: String);
+begin
+
+  if (Value.IsEmpty) then
+    raise Exception.Create('CEP não informado!');
+
+  FCEP := Value;
+end;
+
+end.

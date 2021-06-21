@@ -1,0 +1,156 @@
+unit frmPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB,
+  Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Stan.StorageBin;
+
+type
+  TformPrincipal = class(TForm)
+    Panel7: TPanel;
+    btExcluir: TButton;
+    btGravar: TButton;
+    btEditar: TButton;
+    btIncluir: TButton;
+    btCancelar: TButton;
+    Panel8: TPanel;
+    edNome: TEdit;
+    Panel1: TPanel;
+    edNrIdentidade: TEdit;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    edCpf: TEdit;
+    edTelefone: TEdit;
+    Panel4: TPanel;
+    edEmail: TEdit;
+    Panel5: TPanel;
+    edCep: TEdit;
+    Panel6: TPanel;
+    btBuscar: TButton;
+    Panel9: TPanel;
+    Panel10: TPanel;
+    dbgRegistros: TDBGrid;
+    edLogradouro: TEdit;
+    Panel11: TPanel;
+    edNumero: TEdit;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    edComplemento: TEdit;
+    Panel14: TPanel;
+    edBairro: TEdit;
+    edCidade: TEdit;
+    Panel15: TPanel;
+    Panel16: TPanel;
+    edEstado: TEdit;
+    edNomePais: TEdit;
+    Panel17: TPanel;
+    memRegistros: TFDMemTable;
+    dsRegistros: TDataSource;
+    memRegistrosNOME: TStringField;
+    memRegistrosCPF: TStringField;
+    memRegistrosNR_IDENTIDADE: TStringField;
+    memRegistrosTELEFONE: TStringField;
+    memRegistrosEMAIL: TStringField;
+    memRegistrosCEP: TStringField;
+    memRegistrosLOGRADOURO: TStringField;
+    memRegistrosCOMPLEMENTO: TStringField;
+    memRegistrosBAIRRO: TStringField;
+    memRegistrosCIDADE: TStringField;
+    memRegistrosESTADO: TStringField;
+    memRegistrosPAIS: TStringField;
+    procedure FormCreate(Sender: TObject);
+    procedure btIncluirClick(Sender: TObject);
+    procedure btGravarClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure pHabilitaEdits(bool : boolean);
+    procedure pLimpaEdits();
+  public
+    { Public declarations }
+  end;
+
+var
+  formPrincipal: TformPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TformPrincipal.btGravarClick(Sender: TObject);
+begin
+  try
+    memRegistros.Post;
+    dbgRegistros.Refresh;
+  except on E: Exception do
+    begin
+      ShowMessage(E.ToString);
+      exit;
+    end;
+  end;
+
+end;
+
+procedure TformPrincipal.btIncluirClick(Sender: TObject);
+begin
+  pHabilitaEdits(True);
+  pLimpaEdits();
+
+  try
+//    if not (memRegistros.Active) then
+//      memRegistros.Active := True;
+
+    memRegistros.Append;
+    memRegistrosNOME.AsString          := edNome.Text;
+    memRegistrosCPF.AsString           := edCpf.Text;
+    memRegistrosNR_IDENTIDADE.AsString := edNrIdentidade.Text;
+    memRegistrosTELEFONE.AsString      := edTelefone.Text;
+    memRegistrosEMAIL.AsString         := edEmail.Text;
+    memRegistrosCEP.AsString           := edCep.Text;
+    memRegistrosLOGRADOURO.AsString    := edLogradouro.Text;
+    memRegistrosBAIRRO.AsString        := edBairro.Text;
+    memRegistrosCIDADE.AsString        := edCidade.Text;
+    memRegistrosESTADO.AsString        := edEstado.Text;
+    memRegistrosPAIS.AsString          := edNomePais.Text;
+
+  except on E: Exception do
+    begin
+      ShowMessage(E.ToString);
+      exit;
+    end;
+  end;
+
+end;
+
+procedure TformPrincipal.FormCreate(Sender: TObject);
+begin
+  pHabilitaEdits(False);
+end;
+
+procedure TformPrincipal.pHabilitaEdits(bool: boolean);
+var
+  i: Integer;
+begin
+  for i := Self.ComponentCount -1 downto 0 do
+  begin
+    if (Self.Components[i] is TEdit) then
+       (Self.Components[i] as TEdit).Enabled := bool;
+  end;
+end;
+
+procedure TformPrincipal.pLimpaEdits;
+var
+  i: Integer;
+begin
+  for i := Self.ComponentCount -1 downto 0 do
+  begin
+    if (Self.Components[i] is TEdit) then
+       (Self.Components[i] as TEdit).Text := '';
+  end;
+end;
+
+end.
